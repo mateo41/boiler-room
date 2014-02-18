@@ -1,0 +1,8 @@
+
+<form action="/dialer/call/" method="post"> 
+    {% csrf_token %}
+    <table>
+    {{Call}}
+    </table>
+    <input type="submit" value="Submit" /> 
+</form>

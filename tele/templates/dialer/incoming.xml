@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+    <Say>Placing your call now.</Say>
+    <Dial callerId="+15108172031">{{To}}</Dial>
+</Response>
