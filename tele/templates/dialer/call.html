@@ -1,8 +1,61 @@
+<html>
+    <head>
+        <script type="text/javascript"
+                src="//static.twilio.com/libs/twiliojs/1.1/twilio.min.js"></script>
+        <script type="text/javascript"
+                src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">
+        </script>
+        <link href="//static0.twilio.com/packages/quickstart/client.css"
+               type="text/css" rel="stylesheet" /> 
+        <script type="text/javascript">
+  
+         /* Create the Client with a Capability Token */
+         Twilio.Device.setup("{{ token }}");
+ 
+         /* Let us know when the client is ready. */
+         Twilio.Device.ready(function (device) {
+             $("#log").text("Ready");
+         });
+ 
+         /* Report any errors on the screen */
+         Twilio.Device.error(function (error) {
+             debugger;
+             $("#log").text("Error: " + error.message);
+         });
+ 
+         Twilio.Device.connect(function (conn) {
+             $("#log").text("Successfully established call");
+         });
 
-<form action="/dialer/call/" method="post"> 
-    {% csrf_token %}
-    <table>
-    {{Call}}
-    </table>
-    <input type="submit" value="Submit" /> 
-</form>
+         Twilio.Device.disconnect(function (conn) {
+             $("#log").text("Call ended");
+         }); 
+ 
+    /* Connect to Twilio when we call this function. */
+    function call() {
+        var phone_number = $('#id_phone_number').val(); 
+        Twilio.Device.connect({"PhoneNumber":phone_number});
+    }
+    
+    function hangup(){ 
+        Twilio.Device.disconnectAll();
+    }
+    </script>    
+    </head>
+    <body>
+        <form style="margin-left:160px; margin-top:200px;"> 
+            {% csrf_token %}
+            <table>
+            {{Call}}
+            </table> 
+        </form>
+        
+        <button style="margin-top:0px;" class="call" onclick="call();">
+                Call
+        </button>
+        <button style="margin-top:0px"; class="hangup" onclick="hangup();">
+                Hangup
+        </button> 
+         <div id="log">Loading pigeons...</div>
+    </body>
+</html>
