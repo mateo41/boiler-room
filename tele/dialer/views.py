@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+
 from django.shortcuts import render 
 from django.shortcuts import render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
@@ -13,6 +15,7 @@ from dialer.models import CallForm
 def index(request):
     return render(request, 'dialer/index.html', {})
 
+@login_required
 def call(request): 
     if request.method == "POST": 
         us_call = CallForm(request.POST) 
