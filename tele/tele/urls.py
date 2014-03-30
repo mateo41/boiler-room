@@ -5,6 +5,6 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^dialer/', include('dialer.urls')),
-    url(r'^accounts/', include('accounts.urls')),
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^dialer/accounts/', include('accounts.urls')),
+    url(r'^dialer/admin/', include(admin.site.urls)),
 )

@@ -16,7 +16,7 @@ from dialer.models import CallForm
 def index(request):
     return render(request, 'dialer/index.html', {})
 
-@login_required
+@login_required(login_url='/dialer/accounts/login')
 def call(request): 
     if request.method == "POST": 
         us_call = CallForm(request.POST) 

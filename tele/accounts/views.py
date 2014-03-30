@@ -24,4 +24,4 @@ def handle_login(request):
 
 def handle_logout(request):
     logout(request)
-    return redirect('/accounts/login')
+    return redirect('/dialer/accounts/login')
