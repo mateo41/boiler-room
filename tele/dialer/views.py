@@ -5,6 +5,7 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.context_processors import csrf
 from django.conf import settings 
+from django.views.decorators.csrf import csrf_exempt
 
 from twilio.rest import TwilioRestClient
 from twilio.util import TwilioCapability
@@ -27,10 +28,12 @@ def call(request):
         c.update({"Call": CallForm()})
         return render_to_response('dialer/call.html', c)
 
-def incoming(request):
-    c = {"To": "+15109084612"}
+@csrf_exempt
+def incoming(request): 
+    q = request.GET
+    phone_number = q['PhoneNumber'] 
+    c = {"To": "+"+phone_number}
     return render_to_response('dialer/incoming.xml', c)
-
 
 def generate_token():
     ACCOUNT_SID = settings.ACCOUNT_SID
