@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render_to_response, redirect
 from django.core.context_processors import csrf
 
@@ -22,4 +22,6 @@ def handle_login(request):
          c.update(csrf(request))
          return render_to_response("login.html", c) 
 
-
+def handle_logout(request):
+    logout(request)
+    return redirect('/accounts/login')
